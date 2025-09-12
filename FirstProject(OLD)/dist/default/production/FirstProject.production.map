@@ -1,0 +1,39 @@
+MPLINK 5.09, LINKER
+Linker Map File - Created Wed Sep 10 08:58:15 2025
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000002
+                   .cinit    romdata   0x000001    program   0x000004
+                   .org_1       code   0x000004    program   0x000028
+.config_2007_BUILD/DEFAULT/PRODUCTION/FIRSTPR       code   0x002007    program   0x000002
+.config_2008_BUILD/DEFAULT/PRODUCTION/FIRSTPR       code   0x002008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000002      
+                            0x000004    0x000017      
+                            0x002007    0x002008      
+            25 out of 4359 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    SETUP   0x000005    program     static C:\Users\rudyd\MPLABXProjects\FirstProject\FirstProjectCode.asm
+                     loop   0x000016    program     static C:\Users\rudyd\MPLABXProjects\FirstProject\FirstProjectCode.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    SETUP   0x000005    program     static C:\Users\rudyd\MPLABXProjects\FirstProject\FirstProjectCode.asm
+                     loop   0x000016    program     static C:\Users\rudyd\MPLABXProjects\FirstProject\FirstProjectCode.asm
+
+
