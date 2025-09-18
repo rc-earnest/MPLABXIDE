@@ -151,8 +151,9 @@ MAIN:
     MOVLW   0x7F
     GOTO    DOSTUFF
     
+    
 DOSTUFF:
     MOVWF   PORTC
     GOTO    MAIN
     
- 
+ END
