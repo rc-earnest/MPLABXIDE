@@ -45,10 +45,10 @@ SETUP:	;going to bank 1
 	    CLRF	CCP2CON
 	    CLRF	CCP1CON
 	    CLRF	PORTC
-	    CLK1	EQU,0x20
-	    CLK2	EQU,0x21
-	    CLK3	EQU,0x22
-	    FUDGE	EQU,0x23
+	    CLK1	EQU 0x20
+	    CLK2	EQU 0x21
+	    CLK3	EQU 0x22
+	    FUDGE	EQU 0x23
 	
 	    GOTO	MAIN
 	
@@ -57,13 +57,13 @@ MAIN:	    ;STARTING CODE TO DISPLAY A 5
 	    MOVWF	PORTC
 	    
 	    ;BEGINNING OF .5S DELAY LOOP
-	    MOVLW	8
+	    MOVLW	11
 	    MOVWF	CLK3
 LOOP3:	    
-	    MOVLW	247
+	    MOVLW	184
 	    MOVWF	CLK2
 LOOP2:	    
-	    MOVLW	83
+	    MOVLW	81
 	    MOVWF	CLK1
 LOOP1:	    
 	    DECFSZ	CLK1
@@ -77,7 +77,10 @@ LOOP1:
 EXLOOP:	    
 	    DECFSZ	FUDGE
 	    GOTO	EXLOOP
-	
+	    NOP
+	    NOP
+	    
+	    
 	
 	    
 	    ;STARTING CODE TO DISPLAY A 0
@@ -85,13 +88,13 @@ EXLOOP:
 	    MOVWF	PORTC
 	    
 	    ;BEGINNING OF .5S DELAY LOOP
-	    MOVLW	8
+	    MOVLW	11
 	    MOVWF	CLK3
 LOOP6:	    
-	    MOVLW	247
+	    MOVLW	184
 	    MOVWF	CLK2
 LOOP5:	    
-	    MOVLW	83
+	    MOVLW	81
 	    MOVWF	CLK1
 LOOP4:	    
 	    DECFSZ	CLK1
@@ -102,9 +105,12 @@ LOOP4:
 	    GOTO	LOOP6
 	    MOVLW	13
 	    MOVWF	FUDGE
-EXLOOPS:    
+EXLOOPs:	    
 	    DECFSZ	FUDGE
-	    GOTO	EXLOOPS
+	    GOTO	EXLOOPs
+	    
+	
+	    GOTO	MAIN
 END
 	
 
