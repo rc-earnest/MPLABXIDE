@@ -91,8 +91,7 @@ LOOP1:
 EXLOOP:	    
 	    DECFSZ	FUDGE
 	    GOTO	EXLOOP
-	    NOP
-	    NOP
+	   
 	    RETURN
 
 
