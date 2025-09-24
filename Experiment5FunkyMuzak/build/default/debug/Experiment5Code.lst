@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V3.10 build 20250813170317 
-                                                                                                           Mon Sep 22 12:11:48 2025
+                                                                                                           Tue Sep 23 12:06:12 2025
 
 
      1                           	processor	16F883
@@ -2047,92 +2047,212 @@ Microchip MPLAB XC8 Assembler V3.10 build 20250813170317
   2041     0026  0186               	clrf	6
   2042     0027  0185               	clrf	5
   2043     0020                     CLK1            equ	32
-  2044     0028  1405               	bsf	5,0
-  2045     0029  282A               	goto	MAIN
-  2046     002A                     MAIN:
-  2047     002A  3001               	movlw	1
-  2048     002B  0605               	xorwf	5,w
-  2049     002C  0087               	movwf	7
-  2050     002D  202F               	call	DELAY
-  2051     002E  282A               	goto	MAIN
-  2052     002F                     DELAY:
-  2053     002F  30A3               	movlw	163
-  2054     0030  00A0               	movwf	32
-  2055     0031                     LOOP:
-  2056     0031  0BA0               	decfsz	32,f
-  2057     0032  2831               	goto	LOOP
-  2058     0033  0000               	nop
-  2059     0034  0008               	return
-  2060                           
-  2061                           	psect	edata
-  2062     0000                     stk_offset      set	0
-  2063     0000                     auto_size       set	0
-  2064                           
-  2065                           ; stack_auto defines a symbol /name/_offset which equates to the
-  2066                           ; stack offset of the auto object in question
-  2067     0000                     
-  2068                           ; stack_param defines a symbol /name/_offset which equates to the
-  2069                           ; stack offset of the parameter object in question
-  2070     0000                     
-  2071                           ; alloc_stack adjusts the SP to allocate space for auto objects
-  2072                           ; it also links in to the btemp symbol so that can be used
-  2073     0000                     
-  2074                           ; restore_stack adjusts the SP to remove all auto and parameter
-  2075                           ; objects from the stack prior to returning from a function
-  2076     0000                     
-  2077                           	psect	resetVect
-  2078     0000  2808               	goto	SETUP
-  2079                           
-  2080                           	psect	isrVect
-  2081     0004  0009               	retfie
-  2082                           
-  2083                           	psect	config
-  2084                           
-  2085                           ;Config register CONFIG1 @ 0x2007
-  2086                           ;	Oscillator Selection bits
-  2087                           ;	FOSC = XT, XT oscillator: Crystal/resonator on RA6/OSC2/CLKOUT and RA7/OSC1/CLKIN
-  2088                           ;	Watchdog Timer Enable bit
-  2089                           ;	WDTE = OFF, WDT disabled and can be enabled by SWDTEN bit of the WDTCON register
-  2090                           ;	Power-up Timer Enable bit
-  2091                           ;	PWRTE = OFF, PWRT disabled
-  2092                           ;	RE3/MCLR pin function select bit
-  2093                           ;	MCLRE = ON, RE3/MCLR pin function is MCLR
-  2094                           ;	Code Protection bit
-  2095                           ;	CP = OFF, Program memory code protection is disabled
-  2096                           ;	Data Code Protection bit
-  2097                           ;	CPD = OFF, Data memory code protection is disabled
-  2098                           ;	Brown Out Reset Selection bits
-  2099                           ;	BOREN = OFF, BOR disabled
-  2100                           ;	Internal External Switchover bit
-  2101                           ;	IESO = OFF, Internal/External Switchover mode is disabled
-  2102                           ;	Fail-Safe Clock Monitor Enabled bit
-  2103                           ;	FCMEN = OFF, Fail-Safe Clock Monitor is disabled
-  2104                           ;	Low Voltage Programming Enable bit
-  2105                           ;	LVP = OFF, RB3 pin has digital I/O, HV on MCLR must be used for programming
-  2106                           ;	In-Circuit Debugger Mode bit
-  2107                           ;	DEBUG = 0x1, unprogrammed default
-  2108     2007                     	org	8199
-  2109     2007  20F1               	dw	8433
-  2110                           
-  2111                           ;Config register CONFIG2 @ 0x2008
-  2112                           ;	Brown-out Reset Selection bit
-  2113                           ;	BOR4V = BOR40V, Brown-out Reset set to 4.0V
-  2114                           ;	Flash Program Memory Self Write Enable bits
-  2115                           ;	WRT = OFF, Write protection off
-  2116     2008                     	org	8200
-  2117     2008  3FFF               	dw	16383
+  2044     0021                     CLK2            equ	33
+  2045     0022                     CLK3            equ	34
+  2046     0028  2829               	goto	MAIN
+  2047     0029                     MAIN:
+  2048     0029  3010               	movlw	16
+  2049     002A  0086               	movwf	6
+  2050     002B  3000               	movlw	0
+  2051     002C  1906               	btfsc	6,2
+  2052     002D  2062               	call	DOSTUFF
+  2053     002E  3003               	movlw	3
+  2054     002F  1886               	btfsc	6,1
+  2055     0030  2062               	call	DOSTUFF
+  2056     0031  3006               	movlw	6
+  2057     0032  1806               	btfsc	6,0
+  2058     0033  2062               	call	DOSTUFF
+  2059     0034  3009               	movlw	9
+  2060     0035  1986               	btfsc	6,3
+  2061     0036  2062               	call	DOSTUFF
+  2062     0037  3020               	movlw	32
+  2063     0038  0086               	movwf	6
+  2064     0039  300C               	movlw	12
+  2065     003A  1906               	btfsc	6,2
+  2066     003B  2062               	call	DOSTUFF
+  2067     003C  300F               	movlw	15
+  2068     003D  1886               	btfsc	6,1
+  2069     003E  2062               	call	DOSTUFF
+  2070     003F  3012               	movlw	18
+  2071     0040  1806               	btfsc	6,0
+  2072     0041  2062               	call	DOSTUFF
+  2073     0042  3015               	movlw	21
+  2074     0043  1986               	btfsc	6,3
+  2075     0044  2062               	call	DOSTUFF
+  2076     0045  3040               	movlw	64
+  2077     0046  0086               	movwf	6
+  2078     0047  3018               	movlw	24
+  2079     0048  1906               	btfsc	6,2
+  2080     0049  2062               	call	DOSTUFF
+  2081     004A  301B               	movlw	27
+  2082     004B  1886               	btfsc	6,1
+  2083     004C  2062               	call	DOSTUFF
+  2084     004D  301E               	movlw	30
+  2085     004E  1806               	btfsc	6,0
+  2086     004F  2062               	call	DOSTUFF
+  2087     0050  3021               	movlw	33
+  2088     0051  1986               	btfsc	6,3
+  2089     0052  2062               	call	DOSTUFF
+  2090     0053  3080               	movlw	128
+  2091     0054  0086               	movwf	6
+  2092     0055  3024               	movlw	36
+  2093     0056  1806               	btfsc	6,0
+  2094     0057  2062               	call	DOSTUFF
+  2095     0058  3027               	movlw	39
+  2096     0059  1886               	btfsc	6,1
+  2097     005A  2062               	call	DOSTUFF
+  2098     005B  302A               	movlw	42
+  2099     005C  1906               	btfsc	6,2
+  2100     005D  2062               	call	DOSTUFF
+  2101     005E  302D               	movlw	45
+  2102     005F  1986               	btfsc	6,3
+  2103     0060  2062               	call	DOSTUFF
+  2104     0061  2829               	goto	MAIN
+  2105     0062                     DOSTUFF:
+  2106     0062  0782               	addwf	2,f
+  2107     0063  3035               	movlw	53
+  2108     0064  00A2               	movwf	34
+  2109     0065  2093               	call	SIG
+  2110     0066  303B               	movlw	59
+  2111     0067  00A2               	movwf	34
+  2112     0068  2093               	call	SIG
+  2113     0069  303F               	movlw	63
+  2114     006A  00A2               	movwf	34
+  2115     006B  2093               	call	SIG
+  2116     006C  3047               	movlw	71
+  2117     006D  00A2               	movwf	34
+  2118     006E  2093               	call	SIG
+  2119     006F  304F               	movlw	79
+  2120     0070  00A2               	movwf	34
+  2121     0071  2093               	call	SIG
+  2122     0072  3059               	movlw	89
+  2123     0073  00A2               	movwf	34
+  2124     0074  2093               	call	SIG
+  2125     0075  305E               	movlw	94
+  2126     0076  00A2               	movwf	34
+  2127     0077  2093               	call	SIG
+  2128     0078  306A               	movlw	106
+  2129     0079  00A2               	movwf	34
+  2130     007A  2093               	call	SIG
+  2131     007B  3077               	movlw	119
+  2132     007C  00A2               	movwf	34
+  2133     007D  2093               	call	SIG
+  2134     007E  307E               	movlw	126
+  2135     007F  00A2               	movwf	34
+  2136     0080  2093               	call	SIG
+  2137     0081  308E               	movlw	142
+  2138     0082  00A2               	movwf	34
+  2139     0083  2093               	call	SIG
+  2140     0084  309F               	movlw	159
+  2141     0085  00A2               	movwf	34
+  2142     0086  2093               	call	SIG
+  2143     0087  30B2               	movlw	178
+  2144     0088  00A2               	movwf	34
+  2145     0089  2093               	call	SIG
+  2146     008A  30BD               	movlw	189
+  2147     008B  00A2               	movwf	34
+  2148     008C  2093               	call	SIG
+  2149     008D  30D4               	movlw	212
+  2150     008E  00A2               	movwf	34
+  2151     008F  2093               	call	SIG
+  2152     0090  30EE               	movlw	238
+  2153     0091  00A2               	movwf	34
+  2154     0092  2093               	call	SIG
+  2155     0093                     SIG:
+  2156     0093  3001               	movlw	1
+  2157     0094  0605               	xorwf	5,w
+  2158     0095  0087               	movwf	7
+  2159     0096  2098               	call	DELAY
+  2160     0097  0008               	return
+  2161     0098                     DELAY:
+  2162     0098                     LOOP3:	
+  2163                           ;BEGINNING OF DELAY LOOP
+  2164                           
+  2165     0098  3001               	movlw	1
+  2166     0099  00A1               	movwf	33
+  2167     009A                     LOOP2:
+  2168     009A  3001               	movlw	1
+  2169     009B  00A0               	movwf	32
+  2170     009C                     LOOP1:
+  2171     009C  0BA0               	decfsz	32,f
+  2172     009D  289C               	goto	LOOP1
+  2173     009E  0BA1               	decfsz	33,f
+  2174     009F  289A               	goto	LOOP2
+  2175     00A0  0BA2               	decfsz	34,f
+  2176     00A1  2898               	goto	LOOP3
+  2177     00A2  0008               	return
+  2178                           
+  2179                           	psect	edata
+  2180     0000                     stk_offset      set	0
+  2181     0000                     auto_size       set	0
+  2182                           
+  2183                           ; stack_auto defines a symbol /name/_offset which equates to the
+  2184                           ; stack offset of the auto object in question
+  2185     0000                     
+  2186                           ; stack_param defines a symbol /name/_offset which equates to the
+  2187                           ; stack offset of the parameter object in question
+  2188     0000                     
+  2189                           ; alloc_stack adjusts the SP to allocate space for auto objects
+  2190                           ; it also links in to the btemp symbol so that can be used
+  2191     0000                     
+  2192                           ; restore_stack adjusts the SP to remove all auto and parameter
+  2193                           ; objects from the stack prior to returning from a function
+  2194     0000                     
+  2195                           	psect	resetVect
+  2196     0000  2808               	goto	SETUP
+  2197                           
+  2198                           	psect	isrVect
+  2199     0004  0009               	retfie
+  2200                           
+  2201                           	psect	config
+  2202                           
+  2203                           ;Config register CONFIG1 @ 0x2007
+  2204                           ;	Oscillator Selection bits
+  2205                           ;	FOSC = XT, XT oscillator: Crystal/resonator on RA6/OSC2/CLKOUT and RA7/OSC1/CLKIN
+  2206                           ;	Watchdog Timer Enable bit
+  2207                           ;	WDTE = OFF, WDT disabled and can be enabled by SWDTEN bit of the WDTCON register
+  2208                           ;	Power-up Timer Enable bit
+  2209                           ;	PWRTE = OFF, PWRT disabled
+  2210                           ;	RE3/MCLR pin function select bit
+  2211                           ;	MCLRE = ON, RE3/MCLR pin function is MCLR
+  2212                           ;	Code Protection bit
+  2213                           ;	CP = OFF, Program memory code protection is disabled
+  2214                           ;	Data Code Protection bit
+  2215                           ;	CPD = OFF, Data memory code protection is disabled
+  2216                           ;	Brown Out Reset Selection bits
+  2217                           ;	BOREN = OFF, BOR disabled
+  2218                           ;	Internal External Switchover bit
+  2219                           ;	IESO = OFF, Internal/External Switchover mode is disabled
+  2220                           ;	Fail-Safe Clock Monitor Enabled bit
+  2221                           ;	FCMEN = OFF, Fail-Safe Clock Monitor is disabled
+  2222                           ;	Low Voltage Programming Enable bit
+  2223                           ;	LVP = OFF, RB3 pin has digital I/O, HV on MCLR must be used for programming
+  2224                           ;	In-Circuit Debugger Mode bit
+  2225                           ;	DEBUG = 0x1, unprogrammed default
+  2226     2007                     	org	8199
+  2227     2007  20F1               	dw	8433
+  2228                           
+  2229                           ;Config register CONFIG2 @ 0x2008
+  2230                           ;	Brown-out Reset Selection bit
+  2231                           ;	BOR4V = BOR40V, Brown-out Reset set to 4.0V
+  2232                           ;	Flash Program Memory Self Write Enable bits
+  2233                           ;	WRT = OFF, Write protection off
+  2234     2008                     	org	8200
+  2235     2008  3FFF               	dw	16383
 
 
 Microchip Technology PIC Macro Assembler V3.10 build 20250813170317 
-Symbol Table                                                                                               Mon Sep 22 12:11:48 2025
+Symbol Table                                                                                               Tue Sep 23 12:06:12 2025
 
-                         CLK1 0020                           MAIN 002A                           IOCB 0096  
-                         PCON 008E                           LOOP 0031                           WPUB 0095  
-                        DELAY 002F                          ANSEL 0188                          T1CON 0010  
+                          PCL 0002                            SIG 0093                           CLK1 0020  
+                         CLK2 0021                           CLK3 0022                           MAIN 0029  
+                         IOCB 0096                           PCON 008E                           WPUB 0095  
+                        DELAY 0098                          ANSEL 0188                          T1CON 0010  
+                        LOOP1 009C                          LOOP2 009A                          LOOP3 0098  
                         RCSTA 0018                          SETUP 0008                          PORTA 0005  
                         PORTB 0006                          PORTC 0007                          TRISA 0085  
                         TRISB 0086                          TRISC 0087                         ANSELH 0189  
                        INTCON 000B                         STATUS 0003                         SSPCON 0014  
                       CM1CON0 0107                        CM2CON0 0108                        CCP1CON 0017  
-                      CM2CON1 0109                        CCP2CON 001D                        PSTRCON 009D  
-                   OPTION_REG 0081  
+                      CM2CON1 0109                        CCP2CON 001D                        DOSTUFF 0062  
+                      PSTRCON 009D                     OPTION_REG 0081  

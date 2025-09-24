@@ -12,7 +12,7 @@
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
 $build/default/production/Experiment5Code.o
-code CODE 0 8 8 2F 2 1
+code CODE 0 8 8 AB 2 1
 resetVect CODE 0 0 0 1 2 1
 isrVect CODE 0 4 4 1 2 1
 config CONFIG 4 2007 2007 2 2 1
@@ -30,27 +30,25 @@ BANK1 A0-EF 1
 BANK2 120-16F 1
 CONST 1-3 2
 CONST 5-7 2
-CONST 37-FFF 2
+CONST B3-FFF 2
 ENTRY 1-3 2
 ENTRY 5-7 2
-ENTRY 37-FFF 2
+ENTRY B3-FFF 2
 IDLOC 2000-2003 2
 CODE 1-3 2
 CODE 5-7 2
-CODE 37-FFF 2
+CODE B3-FFF 2
 SFR0 2-7 1
 SFR0 A-F 1
-SFR1 80-9F 1
-SFR2 100-11F 1
 SFR3 180-1EF 1
 COMMON 70-7F 1
 EEDATA 2100-21FF 2
 STRCODE 1-3 2
 STRCODE 5-7 2
-STRCODE 37-FFF 2
+STRCODE B3-FFF 2
 STRING 1-3 2
 STRING 5-7 2
-STRING 37-FFF 2
+STRING B3-FFF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -99,21 +97,145 @@ F code CODE >42:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5C
 25 code CODE >70:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
 26 code CODE >71:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
 27 code CODE >72:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
-28 code CODE >75:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
-29 code CODE >76:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
-2A code CODE >77:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
-2B code CODE >78:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
-2C code CODE >81:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
-2D code CODE >82:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
-2E code CODE >83:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
-2F code CODE >84:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
-30 code CODE >85:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
-31 code CODE >88:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
-32 code CODE >89:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
-33 code CODE >91:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
-34 code CODE >92:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
-35 code CODE >93:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
-36 code CODE >94:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+28 code CODE >77:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+29 code CODE >80:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+2A code CODE >81:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+2B code CODE >83:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+2C code CODE >84:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+2D code CODE >85:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+2E code CODE >87:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+2F code CODE >88:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+30 code CODE >89:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+31 code CODE >91:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+32 code CODE >92:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+33 code CODE >93:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+34 code CODE >95:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+35 code CODE >96:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+36 code CODE >97:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+37 code CODE >100:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+38 code CODE >101:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+39 code CODE >103:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+3A code CODE >104:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+3B code CODE >105:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+3C code CODE >107:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+3D code CODE >108:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+3E code CODE >109:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+3F code CODE >111:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+40 code CODE >112:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+41 code CODE >113:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+42 code CODE >115:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+43 code CODE >116:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+44 code CODE >117:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+45 code CODE >120:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+46 code CODE >121:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+47 code CODE >123:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+48 code CODE >124:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+49 code CODE >125:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+4A code CODE >127:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+4B code CODE >128:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+4C code CODE >129:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+4D code CODE >131:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+4E code CODE >132:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+4F code CODE >133:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+50 code CODE >135:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+51 code CODE >136:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+52 code CODE >137:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+53 code CODE >140:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+54 code CODE >141:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+55 code CODE >143:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+56 code CODE >144:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+57 code CODE >145:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+58 code CODE >147:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+59 code CODE >148:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+5A code CODE >149:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+5B code CODE >151:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+5C code CODE >152:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+5D code CODE >153:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+5E code CODE >155:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+5F code CODE >156:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+60 code CODE >157:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+61 code CODE >159:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+62 code CODE >163:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+63 code CODE >165:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+64 code CODE >166:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+65 code CODE >167:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+66 code CODE >168:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+67 code CODE >170:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+68 code CODE >171:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+69 code CODE >172:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+6A code CODE >173:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+6B code CODE >175:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+6C code CODE >176:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+6D code CODE >177:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+6E code CODE >178:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+6F code CODE >180:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+70 code CODE >181:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+71 code CODE >182:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+72 code CODE >183:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+73 code CODE >185:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+74 code CODE >186:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+75 code CODE >187:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+76 code CODE >188:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+77 code CODE >190:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+78 code CODE >191:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+79 code CODE >192:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+7A code CODE >193:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+7B code CODE >195:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+7C code CODE >196:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+7D code CODE >197:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+7E code CODE >198:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+7F code CODE >200:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+80 code CODE >201:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+81 code CODE >202:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+82 code CODE >203:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+83 code CODE >205:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+84 code CODE >206:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+85 code CODE >207:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+86 code CODE >208:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+87 code CODE >210:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+88 code CODE >211:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+89 code CODE >212:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+8A code CODE >213:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+8B code CODE >215:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+8C code CODE >216:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+8D code CODE >217:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+8E code CODE >218:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+8F code CODE >220:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+90 code CODE >221:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+91 code CODE >222:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+92 code CODE >223:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+93 code CODE >225:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+94 code CODE >226:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+95 code CODE >227:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+96 code CODE >228:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+97 code CODE >230:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+98 code CODE >231:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+99 code CODE >232:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+9A code CODE >233:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+9B code CODE >235:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+9C code CODE >236:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+9D code CODE >237:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+9E code CODE >238:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+9F code CODE >240:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+A0 code CODE >241:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+A1 code CODE >242:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+A2 code CODE >243:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+A3 code CODE >248:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+A4 code CODE >249:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+A5 code CODE >250:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+A6 code CODE >251:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+A7 code CODE >252:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+A8 code CODE >258:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+A9 code CODE >259:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+AA code CODE >261:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+AB code CODE >262:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+AC code CODE >264:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+AD code CODE >265:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+AE code CODE >266:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+AF code CODE >267:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+B0 code CODE >268:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+B1 code CODE >269:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
+B2 code CODE >270:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5Code.S
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -126,24 +248,24 @@ F code CODE >42:C:\Users\rudyd\MPLABXProjects\Experiment5FunkyMuzak\Experiment5C
 # was defined in a psect then <psect> will be "-". File-name
 # is the name of the object file in which the symbol was defined.
 %SYMTAB
-__Hspace_0 6E 0 ABS 0 - -
+__Hspace_0 166 0 ABS 0 - -
 __Hspace_1 0 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
 __Hspace_4 4010 0 ABS 0 - -
 __HisrVect A 0 CODE 0 isrVect -
-__Hudata_bank0 6E 0 ABS 0 udata_bank0 -
-__Hudata_bank1 6E 0 ABS 0 udata_bank1 -
-__Hudata_bank2 6E 0 ABS 0 udata_bank2 -
+__Hudata_bank0 166 0 ABS 0 udata_bank0 -
+__Hudata_bank1 166 0 ABS 0 udata_bank1 -
+__Hudata_bank2 166 0 ABS 0 udata_bank2 -
 __L__absolute__ 0 0 ABS 0 __absolute__ -
-__Hedata 6E 0 ABS 0 edata -
-__Hudata 6E 0 ABS 0 udata -
+__Hedata 166 0 ABS 0 edata -
+__Hudata 166 0 ABS 0 udata -
 __Hconfig 4012 0 CONFIG 4 config -
-__Ledata 6E 0 ABS 0 edata -
-__Ludata 6E 0 ABS 0 udata -
-__Hcode 6E 0 CODE 0 code -
-__Hdata 6E 0 ABS 0 data -
+__Ledata 166 0 ABS 0 edata -
+__Ludata 166 0 ABS 0 udata -
+__Hcode 166 0 CODE 0 code -
+__Hdata 166 0 ABS 0 data -
 __Lcode 10 0 CODE 0 code -
-__Ldata 6E 0 ABS 0 data -
+__Ldata 166 0 ABS 0 data -
 __S0 0 0 ABS 0 - -
 __S1 0 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
@@ -154,13 +276,13 @@ __Lspace_3 0 0 ABS 0 - -
 __Lspace_4 0 0 ABS 0 - -
 __LisrVect 8 0 CODE 0 isrVect -
 __HresetVect 2 0 CODE 0 resetVect -
-__Ludata_bank0 6E 0 ABS 0 udata_bank0 -
-__Ludata_bank1 6E 0 ABS 0 udata_bank1 -
-__Ludata_bank2 6E 0 ABS 0 udata_bank2 -
+__Ludata_bank0 166 0 ABS 0 udata_bank0 -
+__Ludata_bank1 166 0 ABS 0 udata_bank1 -
+__Ludata_bank2 166 0 ABS 0 udata_bank2 -
 __H__absolute__ 0 0 ABS 0 __absolute__ -
 __LresetVect 0 0 CODE 0 resetVect -
-__Hudata_shr 6E 0 ABS 0 udata_shr -
-__Ludata_shr 6E 0 ABS 0 udata_shr -
+__Hudata_shr 166 0 ABS 0 udata_shr -
+__Ludata_shr 166 0 ABS 0 udata_shr -
 # %SPLITSTAB Section
 # This section enumerates all the psect splits performed by the assembler.
 # The beginning of the section is indicated by %SPLITSTAB.
@@ -185,7 +307,7 @@ __Ludata_shr 6E 0 ABS 0 udata_shr -
 # and size are in units of delta. The file address is in units of bytes.
 # All other numeric quantities are in decimal.
 %SEGMENTS
-code 0 8 10 2F 2
+code 0 8 10 AB 2
 resetVect 0 0 0 1 2
 isrVect 0 4 8 1 2
 # %NOTES Section
