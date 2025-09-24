@@ -72,186 +72,32 @@ SETUP:
     CLRF    PORTA
     
     CLK1    EQU 0X20
-    CLK2    EQU	0x21
-    CLK3    EQU 0x23
-    BSF	    PORTA,0
+    CLK2    EQU 0x21
+    CLK3    EQU 0x22
     GOTO    MAIN
     
 MAIN:
-     ;Start of checking row with 123A
-    MOVLW   0x10
-    MOVWF   PORTB
-    
-    MOVLW   0
-    BTFSC   PORTB,2
-    CALL    DOSTUFF
-
-    MOVLW   3
-    BTFSC   PORTB,1
-    CALL    DOSTUFF
-
-    MOVLW   6
-    BTFSC   PORTB,0
-    CALL    DOSTUFF
-    
-    MOVLW   9
-    BTFSC   PORTB,3
-    CALL    DOSTUFF
-    
-    ;Start of checking row with 456B
-    MOVLW   0x20
-    MOVWF   PORTB
-    
-    MOVLW   12
-    BTFSC   PORTB,2
-    CALL    DOSTUFF
-
-    MOVLW   15
-    BTFSC   PORTB,1
-    CALL    DOSTUFF
-
-    MOVLW   18
-    BTFSC   PORTB,0
-    CALL    DOSTUFF
-    
-    MOVLW   21
-    BTFSC   PORTB,3
-    CALL    DOSTUFF
-    
-    ;Start of checking row with 789C
-    MOVLW   0x40
-    MOVWF   PORTB
-    
-    MOVLW   24
-    BTFSC   PORTB,2
-    CALL    DOSTUFF
-
-    MOVLW   27
-    BTFSC   PORTB,1
-    CALL    DOSTUFF
-
-    MOVLW   30
-    BTFSC   PORTB,0
-    CALL    DOSTUFF
-    
-    MOVLW   33
-    BTFSC   PORTB,3
-    CALL    DOSTUFF
-    
-    ;Start of checking row with *0#D
-    MOVLW   0x80
-    MOVWF   PORTB
-    
-    MOVLW   36
-    BTFSC   PORTB,0
-    CALL    DOSTUFF
-
-    MOVLW   39
-    BTFSC   PORTB,1
-    CALL    DOSTUFF
-
-    MOVLW   42
-    BTFSC   PORTB,2
-    CALL    DOSTUFF
-    
-    MOVLW   45
-    BTFSC   PORTB,3
-    CALL    DOSTUFF
-    
-    GOTO    MAIN
-    
-DOSTUFF:
-    ADDWF   PCL,1
-    
-    MOVLW   0x35
-    MOVWF   CLK3
-    CALL    SIG
-    
-    MOVLW   0x3B
-    MOVWF   CLK3
-    CALL    SIG
-    
-    MOVLW   0x3F
-    MOVWF   CLK3
-    CALL    SIG
-    
-    MOVLW   0x47
-    MOVWF   CLK3
-    CALL    SIG
-    
-    MOVLW   0x4F
-    MOVWF   CLK3
-    CALL    SIG
-    
-    MOVLW   0x59
-    MOVWF   CLK3
-    CALL    SIG
-    
-    MOVLW   0x5E
-    MOVWF   CLK3
-    CALL    SIG
-    
-    MOVLW   0x6A
-    MOVWF   CLK3
-    CALL    SIG
-    
-    MOVLW   0x77
-    MOVWF   CLK3
-    CALL    SIG
-    
-    MOVLW   0x7E
-    MOVWF   CLK3
-    CALL    SIG
-    
-    MOVLW   0x8E
-    MOVWF   CLK3
-    CALL    SIG
-    
-    MOVLW   0x9F
-    MOVWF   CLK3
-    CALL    SIG
-    
-    MOVLW   0xB2
-    MOVWF   CLK3
-    CALL    SIG
-    
-    MOVLW   0xBD
-    MOVWF   CLK3
-    CALL    SIG
-    
-    MOVLW   0xD4
-    MOVWF   CLK3
-    CALL    SIG
-    
-    MOVLW   0xEE
-    MOVWF   CLK3
-    CALL    SIG
-    
-    
-
-SIG:
+    MOVLW   0X10
+    MOVWF   PORTB 
+    MOVLW   0X20
+    MOVWF   PORTB 
+    MOVLW   0X40
+    MOVWF   PORTB 
+    MOVLW   0X80
+    MOVWF   PORTB 
     MOVLW   0X01
     XORWF   PORTA,0
     MOVWF   PORTC
     CALL    DELAY
-    RETURN
-    
+    GOTO    MAIN
     
 DELAY:
-;BEGINNING OF DELAY LOOP
-LOOP3:	    
-    MOVLW   1
-    MOVWF   CLK2
-LOOP2:	    
-    MOVLW   1
+    MOVLW   163
     MOVWF   CLK1
-LOOP1:	    
+ LOOP:
     DECFSZ  CLK1
-    GOTO    LOOP1
-    DECFSZ  CLK2
-    GOTO    LOOP2
-    DECFSZ  CLK3
-    GOTO    LOOP3    
+    GOTO    LOOP
+    NOP
     RETURN
-	   
+    
     END

@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=MuzakCode.S
+SOURCEFILES_QUOTED_IF_SPACED=FunkyMuzakCodeSSS.S
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/MuzakCode.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/MuzakCode.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/FunkyMuzakCodeSSS.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/FunkyMuzakCodeSSS.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/MuzakCode.o
+OBJECTFILES=${OBJECTDIR}/FunkyMuzakCodeSSS.o
 
 # Source Files
-SOURCEFILES=MuzakCode.S
+SOURCEFILES=FunkyMuzakCodeSSS.S
 
 
 
@@ -89,21 +89,21 @@ FINAL_IMAGE_NAME_MINUS_EXTENSION=${DISTDIR}/Experiment5Muzak.${IMAGE_TYPE}
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: pic-as-assembler
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/MuzakCode.o: MuzakCode.S  nbproject/Makefile-${CND_CONF}.mk 
+${OBJECTDIR}/FunkyMuzakCodeSSS.o: FunkyMuzakCodeSSS.S  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/MuzakCode.o 
+	@${RM} ${OBJECTDIR}/FunkyMuzakCodeSSS.o 
 	${MP_AS} -mcpu=PIC16F883 -c \
-	-o ${OBJECTDIR}/MuzakCode.o \
-	MuzakCode.S \
+	-o ${OBJECTDIR}/FunkyMuzakCodeSSS.o \
+	FunkyMuzakCodeSSS.S \
 	 -D__DEBUG=1   -mdfp="${DFP_DIR}/xc8"  -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
 	
 else
-${OBJECTDIR}/MuzakCode.o: MuzakCode.S  nbproject/Makefile-${CND_CONF}.mk 
+${OBJECTDIR}/FunkyMuzakCodeSSS.o: FunkyMuzakCodeSSS.S  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/MuzakCode.o 
+	@${RM} ${OBJECTDIR}/FunkyMuzakCodeSSS.o 
 	${MP_AS} -mcpu=PIC16F883 -c \
-	-o ${OBJECTDIR}/MuzakCode.o \
-	MuzakCode.S \
+	-o ${OBJECTDIR}/FunkyMuzakCodeSSS.o \
+	FunkyMuzakCodeSSS.S \
 	  -mdfp="${DFP_DIR}/xc8"  -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
 	
 endif
