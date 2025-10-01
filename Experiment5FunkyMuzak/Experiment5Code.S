@@ -237,7 +237,7 @@ MAIN:
     CALL    SIG
     RETURN
     
-    MOVLW   219
+    MOVLW   219 
     MOVWF   CLK3
     CALL    SIG
     RETURN
