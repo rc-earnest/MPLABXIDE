@@ -1,4 +1,9 @@
-; PIC16F883 Configuration Bit Settings
+;Rudy Earnest
+;RCET 3375
+;Fall 2025
+;PIC	EEPROM
+;github 
+    ; PIC16F883 Configuration Bit Settings
 
 ; Assembly source line config statements
 
