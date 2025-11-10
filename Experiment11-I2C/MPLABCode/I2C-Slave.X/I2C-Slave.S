@@ -25,14 +25,13 @@
 
 // config statements should precede project file includes.
 #include <xc.inc>
-
+SSP_SAVE    EQU 0x20
 
 PSECT resetVect,class=CODE,delta=2
    GOTO    SETUP
 
 PSECT isrVect,class=CODE,delta=2
-  RETFIE
-   ; GOTO    ISR_VECT
+   GOTO    ISR_VECT
   
 PSECT code,class=CODE,delta=2
 SETUP:
@@ -50,50 +49,71 @@ SETUP:
     ;Bank 1
     BSF	    STATUS,5
     BCF	    STATUS,6
-    MOVLW   9
-    MOVWF   SSPADD
+    CLRF    TRISB
     MOVLW   0xFF
     MOVWF   TRISC
+    MOVLW   0x20
+    MOVWF   SSPADD
+    BCF	    SSPSTAT,7
+    BSF	    PIE1,3
     
     ;Bank 0
     BCF	    STATUS,5
     BCF	    STATUS,6
-    BSF	    SSPCON,3
-    BCF	    SSPCON,2
-    BCF	    SSPCON,1
+    CLRF    PORTB
+    
+    BCF	    SSPCON,3
+    BSF	    SSPCON,2
+    BSF	    SSPCON,1
     BCF	    SSPCON,0
+    
     BSF	    SSPCON,5
     
-    GOTO MAIN
+    BCF	    PIR1,3
+    BSF	    INTCON,6
+    BSF	    INTCON,7
+    
+    GOTO    MAIN
     
 MAIN:
-    BSF	    STATUS,5
-    BCF	    STATUS,6
-    BSF	    SSPCON2,0
-    BTFSC   SSPCON2,0
-    GOTO    $-1
-    BCF	    STATUS,5
-    BCF	    STATUS,6
-    MOVLW   0x20
-    MOVWF   SSPBUF
-    BSF	    STATUS,5
-    BCF	    STATUS,6
-    BTFSC   SSPSTAT,2
-    GOTO    $-1
-    BTFSC   SSPCON2,7
-    GOTO    $-1
-    BCF	    STATUS,5
-    BCF	    STATUS,6
-    MOVLW   0xAA
-    MOVWF   SSPBUF
-    BSF	    STATUS,5
-    BCF	    STATUS,6
-    BTFSC   SSPSTAT,2
-    GOTO    $-1
-    BTFSC   SSPCON2,7
-    GOTO    $-1
-    BSF	    SSPCON2,2
-    BTFSC   SSPCON2,2
-    GOTO    $-1
     GOTO    MAIN
+    
+    
+ISR_VECT:
+    BCF	    STATUS,5
+    BCF	    STATUS,6
+    BSF	    PORTB,0
+    BTFSC   PIR1,3
+    GOTO    ADDR
+    GOTO    END_ISR
+    
+ADDR:
+    MOVF    SSPBUF,0
+    BCF	    PIR1,3
+    BTFSC   SSPBUF,0
+    GOTO    READ
+    GOTO    WRITE
+    GOTO    END_ISR
+    
+READ:
+    MOVLW   0xAA
+    BCF	    STATUS,5
+    BCF	    STATUS,6
+    MOVWF   SSPBUF
+    GOTO    END_ISR
+    
+WRITE:
+    MOVWF   SSP_SAVE
+    BSF	    STATUS,5
+    BCF	    STATUS,6
+    BTFSC   SSPSTAT,4
+    GOTO    END_ISR
+    BCF	    SSPCON2,5
+    BSF	    SSPCON2,4
+    GOTO    END_ISR
+    
+    
+END_ISR:
+    BCF	    PORTB,0
+    RETFIE
     END

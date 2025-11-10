@@ -17,10 +17,11 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>I2C-Master.S</itemPath>
+      <itemPath>I2C-Slave.S</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
+    <Elem>../I2C-Master.X</Elem>
     <Elem>.</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
