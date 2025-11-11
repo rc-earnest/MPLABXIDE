@@ -25,7 +25,9 @@
 
 // config statements should precede project file includes.
 #include <xc.inc>
-
+ADC_SAVE    EQU	0x20
+ADC_COUNTER EQU 0x21
+SEND_DATA   EQU 0x22
 
 PSECT resetVect,class=CODE,delta=2
    GOTO    SETUP
@@ -40,6 +42,9 @@ SETUP:
     BSF	    STATUS,5
     BSF	    STATUS,6
     CLRF    ANSEL
+    BSF	    ANSEL,0
+    BSF	    ANSEL,1
+    BSF	    ANSEL,2
     CLRF    ANSELH
     
     ;Bank 2
@@ -54,6 +59,7 @@ SETUP:
     MOVWF   SSPADD
     MOVLW   0xFF
     MOVWF   TRISC
+    CLRF    ADCON1
     
     ;Bank 0
     BCF	    STATUS,5
@@ -63,10 +69,34 @@ SETUP:
     BCF	    SSPCON,1
     BCF	    SSPCON,0
     BSF	    SSPCON,5
+    CLRF    ADCON0
+    BSF	    ADCON0,6
+    BSF	    ADCON0,0
     
     GOTO MAIN
     
 MAIN:
+    BCF	    STATUS,5
+    BCF	    STATUS,6
+    BSF	    ADCON0,1
+    BTFSC   ADCON0,1
+    GOTO    $-1
+    INCF    ADC_COUNTER
+    MOVF    ADRESH,0
+    MOVWF   ADC_SAVE
+    MOVF    ADC_COUNTER,0
+    XORLW   0x01
+    BTFSC   STATUS,2
+    CALL    ADC0
+    MOVF    ADC_COUNTER,0
+    XORLW   0x02
+    BTFSC   STATUS,2
+    CALL    ADC1
+    MOVF    ADC_COUNTER,0
+    XORLW   0x03
+    BTFSC   STATUS,2
+    CALL    ADC2
+    
     BSF	    STATUS,5
     BCF	    STATUS,6
     BSF	    SSPCON2,0
@@ -84,7 +114,7 @@ MAIN:
     GOTO    $-1
     BCF	    STATUS,5
     BCF	    STATUS,6
-    MOVLW   0xAA
+    MOVF    SEND_DATA,0
     MOVWF   SSPBUF
     BSF	    STATUS,5
     BCF	    STATUS,6
@@ -96,4 +126,49 @@ MAIN:
     BTFSC   SSPCON2,2
     GOTO    $-1
     GOTO    MAIN
+    
+    
+    
+ADC0:
+    BCF	    STATUS,0
+    RRF	    ADC_SAVE,1
+    BCF	    STATUS,0
+    RRF	    ADC_SAVE,1
+    BCF	    STATUS,0
+    RRF	    ADC_SAVE,1
+    MOVLW   0x20
+    IORWF   ADC_SAVE,0
+    MOVWF   SEND_DATA
+    BSF	    ADCON0,2
+    RETURN
+    
+ADC1:
+    BCF	    STATUS,0
+    RRF	    ADC_SAVE,1
+    BCF	    STATUS,0
+    RRF	    ADC_SAVE,1
+    BCF	    STATUS,0
+    RRF	    ADC_SAVE,1
+    MOVLW   0x40
+    IORWF   ADC_SAVE,0
+    MOVWF   SEND_DATA
+    BCF	    ADCON0,2
+    BSF	    ADCON0,3
+    RETURN
+    
+ADC2:
+    BCF	    STATUS,0
+    RRF	    ADC_SAVE,1
+    BCF	    STATUS,0
+    RRF	    ADC_SAVE,1
+    BCF	    STATUS,0
+    RRF	    ADC_SAVE,1
+    MOVLW   0x80
+    IORWF   ADC_SAVE,0
+    MOVWF   SEND_DATA
+    BCF	    ADCON0,2
+    BCF	    ADCON0,3
+    CLRF    ADC_COUNTER
+    RETURN
+    
     END
