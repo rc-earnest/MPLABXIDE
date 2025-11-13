@@ -25,7 +25,12 @@
 
 // config statements should precede project file includes.
 #include <xc.inc>
-SSP_SAVE    EQU 0x20
+SSP_SAVE	EQU 0x20
+SERVO1		EQU 0x21
+SERVO2		EQU 0x22
+SERVO3		EQU 0x23
+PERIOD		EQU 0x24
+TEMP		EQU 0x25
 
 PSECT resetVect,class=CODE,delta=2
    GOTO    SETUP
@@ -57,6 +62,10 @@ SETUP:
     BCF	    SSPSTAT,7
     BSF	    PIE1,3
     
+    MOVLW   100
+    MOVWF   PR2
+    BSF	    PIE1,1
+    
     ;Bank 0
     BCF	    STATUS,5
     BCF	    STATUS,6
@@ -69,6 +78,20 @@ SETUP:
     
     BSF	    SSPCON,5
     
+    MOVLW   1
+    MOVWF   PERIOD
+    
+    MOVLW   170
+    MOVWF   SERVO1
+    MOVLW   195
+    MOVWF   SERVO2
+    MOVLW   175
+    MOVWF   SERVO3
+    
+    MOVLW   0x04
+    MOVWF   T2CON
+    
+    BCF	    PIR1,1
     BCF	    PIR1,3
     BSF	    INTCON,6
     BSF	    INTCON,7
@@ -82,9 +105,39 @@ MAIN:
 ISR_VECT:
     BCF	    STATUS,5
     BCF	    STATUS,6
-    BSF	    PORTB,0
     BTFSC   PIR1,3
     GOTO    ADDR
+    BTFSC   PIR1,1
+    GOTO    T2_ISR
+    GOTO    END_ISR
+    
+T2_ISR:
+    BCF	    PIR1,1
+    DECFSZ  PERIOD
+    GOTO    CHECK_ISR
+    MOVLW   200
+    MOVWF   PERIOD
+    BSF	    PORTB,0
+    BSF	    PORTB,1
+    BSF	    PORTB,2
+    GOTO    END_ISR
+    
+CHECK_ISR:
+    MOVF    PERIOD,0
+    SUBWF   SERVO1,0
+    BTFSC   STATUS,2
+    BCF	    PORTB,0
+    
+    MOVF    PERIOD,0
+    SUBWF   SERVO2,0
+    BTFSC   STATUS,2
+    BCF	    PORTB,1
+    
+    MOVF    PERIOD,0
+    SUBWF   SERVO3,0
+    BTFSC   STATUS,2
+    BCF	    PORTB,2
+    
     GOTO    END_ISR
     
 ADDR:
@@ -96,14 +149,20 @@ ADDR:
     GOTO    END_ISR
     
 READ:
-    MOVLW   0xAA
-    BCF	    STATUS,5
-    BCF	    STATUS,6
-    MOVWF   SSPBUF
-    GOTO    END_ISR
+;    MOVLW   0xAA
+;    BCF	    STATUS,5
+;    BCF	    STATUS,6
+;    MOVWF   SSPBUF
+;    GOTO    END_ISR
     
 WRITE:
     MOVWF   SSP_SAVE
+    BTFSC   SSP_SAVE,7
+    CALL    S_1
+    BTFSC   SSP_SAVE,6
+    CALL    S_2
+    BTFSC   SSP_SAVE,5
+    CALL    S_3
     BSF	    STATUS,5
     BCF	    STATUS,6
     BTFSC   SSPSTAT,4
@@ -113,7 +172,105 @@ WRITE:
     GOTO    END_ISR
     
     
+S_1:
+    CALL    CONVERSION
+    MOVWF   SERVO1
+    RETURN
+    
+S_2:
+    CALL    CONVERSION
+    MOVWF   SERVO2
+    RETURN
+    
+S_3:
+    CALL    CONVERSION
+    MOVWF   SERVO3
+    RETURN
+    
+    
+    
+CONVERSION:
+    MOVLW   0
+    BTFSC   SSP_SAVE,0
+    ADDLW   2
+    BTFSC   SSP_SAVE,1
+    ADDLW   4
+    BTFSC   SSP_SAVE,2
+    ADDLW   8
+    BTFSC   SSP_SAVE,3
+    ADDLW   16
+    BTFSC   SSP_SAVE,4
+    ADDLW   32
+    MOVWF   TEMP
+    
+    MOVF    TEMP,0
+    ADDWF   PCL,1
+    
+    MOVLW   170
+    RETURN
+    MOVLW   170
+    RETURN
+    MOVLW   171
+    RETURN
+    MOVLW   171
+    RETURN
+    MOVLW   172
+    RETURN
+    MOVLW   172
+    RETURN
+    MOVLW   173
+    RETURN
+    MOVLW   173
+    RETURN
+    MOVLW   174
+    RETURN
+    MOVLW   174
+    RETURN
+    MOVLW   175
+    RETURN
+    MOVLW   176
+    RETURN
+    MOVLW   177
+    RETURN
+    MOVLW   178
+    RETURN
+    MOVLW   179
+    RETURN
+    MOVLW   180
+    RETURN
+    MOVLW   181
+    RETURN
+    MOVLW   182
+    RETURN
+    MOVLW   183
+    RETURN
+    MOVLW   184
+    RETURN
+    MOVLW   185
+    RETURN
+    MOVLW   186
+    RETURN
+    MOVLW   187
+    RETURN
+    MOVLW   188
+    RETURN
+    MOVLW   189
+    RETURN
+    MOVLW   190
+    RETURN
+    MOVLW   191
+    RETURN
+    MOVLW   192
+    RETURN
+    MOVLW   193
+    RETURN
+    MOVLW   194
+    RETURN
+    MOVLW   195
+    RETURN
+    MOVLW   195
+    RETURN
+    
 END_ISR:
-    BCF	    PORTB,0
     RETFIE
     END
