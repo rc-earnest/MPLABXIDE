@@ -80,13 +80,13 @@ SETUP:
     
     MOVLW   1
     MOVWF   PERIOD
-    
-    MOVLW   170
-    MOVWF   SERVO1
-    MOVLW   195
-    MOVWF   SERVO2
-    MOVLW   175
-    MOVWF   SERVO3
+//    
+//    MOVLW   170
+//    MOVWF   SERVO1
+//    MOVLW   195
+//    MOVWF   SERVO2
+//    MOVLW   175
+//    MOVWF   SERVO3
     
     MOVLW   0x04
     MOVWF   T2CON
@@ -119,7 +119,7 @@ T2_ISR:
     MOVWF   PERIOD
     BSF	    PORTB,0
     BSF	    PORTB,1
-    BSF	    PORTB,2
+    BSF	    PORTB,3
     GOTO    END_ISR
     
 CHECK_ISR:
@@ -136,7 +136,7 @@ CHECK_ISR:
     MOVF    PERIOD,0
     SUBWF   SERVO3,0
     BTFSC   STATUS,2
-    BCF	    PORTB,2
+    BCF	    PORTB,3
     
     GOTO    END_ISR
     
@@ -149,13 +149,15 @@ ADDR:
     GOTO    END_ISR
     
 READ:
-;    MOVLW   0xAA
-;    BCF	    STATUS,5
-;    BCF	    STATUS,6
-;    MOVWF   SSPBUF
-;    GOTO    END_ISR
+    GOTO    END_ISR
     
 WRITE:
+    BSF	    STATUS,5
+    BCF	    STATUS,6
+    BTFSS   SSPSTAT,5
+    GOTO    END_ISR
+    BCF	    STATUS,5
+    BCF	    STATUS,6
     MOVWF   SSP_SAVE
     BTFSC   SSP_SAVE,7
     CALL    S_1
@@ -270,7 +272,15 @@ CONVERSION:
     RETURN
     MOVLW   195
     RETURN
+    MOVLW   195
+    RETURN
+    MOVLW   195
+    RETURN
+    MOVLW   195
+    RETURN
     
 END_ISR:
+    BCF	    STATUS,5
+    BCF	    STATUS,6
     RETFIE
     END

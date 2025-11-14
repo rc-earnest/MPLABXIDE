@@ -72,6 +72,8 @@ SETUP:
     CLRF    ADCON0
     BSF	    ADCON0,6
     BSF	    ADCON0,0
+    BSF	    ADCON0,2
+    BSF	    ADCON0,3
     
     GOTO MAIN
     
@@ -139,6 +141,7 @@ ADC0:
     MOVLW   0x20
     IORWF   ADC_SAVE,0
     MOVWF   SEND_DATA
+    BCF	    ADCON0,3
     BSF	    ADCON0,2
     RETURN
     
@@ -166,8 +169,8 @@ ADC2:
     MOVLW   0x80
     IORWF   ADC_SAVE,0
     MOVWF   SEND_DATA
-    BCF	    ADCON0,2
-    BCF	    ADCON0,3
+    BSF	    ADCON0,2
+    BSF	    ADCON0,3
     CLRF    ADC_COUNTER
     RETURN
     
